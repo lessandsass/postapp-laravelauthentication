@@ -20,16 +20,20 @@ class RegisterController extends Controller
     public function store(Request $request) :RedirectResponse
     {
         $this->validate($request, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
+            'name' => 'required|max:50|min:4',
+            'username' => 'required|max:25|min:4|unique:users,username',
+            'email' => 'required|max:50|min:4|email|unique:users,email',
+            'password' => 'required|confirmed|min:6',
         ]);
 
         User::create([
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' =>Hash::make($request->password)
         ]);
+
+        auth()->attempt($request->only('email', 'password'));
 
         return redirect('dashboard')->with('status', 'You have registered Successfully');
     }
