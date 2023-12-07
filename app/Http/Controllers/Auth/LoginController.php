@@ -9,6 +9,11 @@ use Illuminate\View\View;
 
 class LoginController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
     public function index() :View
     {
         return view('auth.login');
@@ -25,7 +30,7 @@ class LoginController extends Controller
             return back()->with('status', 'Invalid login details');
         }
 
-        return redirect()->intended('/')->with('status', 'Login Successfully');
+        return redirect()->intended('/home')->with('status', 'Login Successfully');
 
     }
 }

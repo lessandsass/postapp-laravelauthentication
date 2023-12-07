@@ -6,8 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PostApp-Laravel Authentication</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 
 </head>
 <body class="bg-gray-900">
@@ -30,7 +29,6 @@
                         <button type="submit">Logout</button>
                     </form>
                 </li>
-
             @endauth
 
             @guest

@@ -13,6 +13,11 @@ use Illuminate\Http\RedirectResponse;
 class RegisterController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function index() :View
     {
         return view('auth.register');
@@ -24,7 +29,7 @@ class RegisterController extends Controller
             'name' => 'required|max:50|min:4',
             'username' => 'required|max:25|min:4|unique:users,username',
             'email' => 'required|max:50|min:4|email|unique:users,email',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|confirmed|min:8',
         ]);
 
         User::create([
