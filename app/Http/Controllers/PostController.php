@@ -24,7 +24,6 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
-        dd('passed');
     }
 
 }

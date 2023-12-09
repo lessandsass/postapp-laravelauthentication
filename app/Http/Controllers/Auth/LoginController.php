@@ -30,7 +30,7 @@ class LoginController extends Controller
             return back()->with('status', 'Invalid login details');
         }
 
-        return redirect()->intended('/home')->with('status', 'Login Successfully');
+        return redirect()->intended('/')->with('status', 'Login Successfully');
 
     }
 }

@@ -39,7 +39,7 @@
         </ul>
     </nav>
 
-    <div class="container mx-auto mt-6 px-6 text-center">
+    <div class="container mx-auto mt-6 px-6">
         @yield('content')
     </div>
 </body>
