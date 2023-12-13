@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
@@ -13,7 +14,12 @@ class Post extends Model
         'body',
     ];
 
-    public function user()
+    public function ownedBy($id)
+    {
+        return $id === $this->user_id;
+    }
+
+    public function user() :BelongsTo
     {
         return $this->belongsTo(User::class);
     }

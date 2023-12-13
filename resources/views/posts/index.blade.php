@@ -5,6 +5,12 @@
 
         <div class="w-6/12 bg-gray-800 text-gray-200 p-6 rounded-lg">
 
+            @if (session('status'))
+                <div class="bg-red-500 p-4 rounded-lg mb-6 text-white text-center">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             @guest
                 <p>Please log in to create posts</p>
             @endguest
@@ -39,7 +45,30 @@
             @endauth
 
             <div class="mt-3">
-                Post index
+                @if($posts->count())
+                    @foreach($posts as $post)
+                        <div>
+                            <a href="#" class="font-medium text-blue-700">{{ $post->user->name }}</a>
+                            <span class="text-gray-500 text-sm">{{ $post->created_at->diffForHumans() }}</span>
+                        </div>
+
+                        <p class="mb-2">{{ $post->body }}</p>
+
+                        @if($post->ownedBy(auth()->id()))
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="post" class="p-3 inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-700">Delete</button>
+                            </form>
+                        @endif
+
+                    @endforeach
+
+                    <p class="mb-2">{{ $posts->links() }}</p>
+
+                @else
+                    <p>There are no posts</p>
+                @endif
             </div>
 
         </div>
