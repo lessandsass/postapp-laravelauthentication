@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -35,12 +36,15 @@ class PostController extends Controller
         return back();
     }
 
-    public function destroy(Post $post)
+    public function destroy(Request $request, Post $post)
     {
+        if (!$post->ownedBy($request->user())) {
+            throw new AuthorizationException();
+        }
+
         $post->delete();
 
         return back()->with('status', 'The post has been deleted successfully');
     }
-
 
 }
