@@ -48,7 +48,7 @@
                 @if($posts->count())
                     @foreach($posts as $post)
                         <div>
-                            <a href="#" class="font-medium text-blue-700">{{ $post->user->name }}</a>
+                            <a href="{{ route('users.posts', $post->user) }}" class="font-medium text-blue-700">{{ $post->user->name }}</a>
                             <span class="text-gray-500 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
 
