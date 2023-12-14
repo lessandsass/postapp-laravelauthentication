@@ -10,7 +10,7 @@
                 @if($posts->count())
                     @foreach($posts as $post)
                         <div>
-                            <div href="#" class="font-medium text-blue-700">{{ $post->user->name }}</div>
+                            <div class="font-medium text-blue-700">{{ $post->user->name }}</div>
                             <span class="text-gray-500 text-sm">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
 
